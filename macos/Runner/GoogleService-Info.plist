@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDjY_YIixn09-zXvxB_2U8cbc5xjTQ6VkU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>198491870386</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.antigravity.antigravity</string>
+	<key>PROJECT_ID</key>
+	<string>encomanti</string>
+	<key>STORAGE_BUCKET</key>
+	<string>encomanti.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:198491870386:ios:bac2189097a8807e9e25ab</string>
+	<key>DATABASE_URL</key>
+	<string>https://encomanti-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

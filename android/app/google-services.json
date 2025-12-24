@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "198491870386",
+    "firebase_url": "https://encomanti-default-rtdb.firebaseio.com",
+    "project_id": "encomanti",
+    "storage_bucket": "encomanti.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198491870386:android:d90a3f38caa7e34c9e25ab",
+        "android_client_info": {
+          "package_name": "com.antigravity.antigravity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOm9DO15nQhcPjGuh6vxo6nFTwSIqfhqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
