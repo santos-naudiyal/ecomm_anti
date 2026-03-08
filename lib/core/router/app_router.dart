@@ -15,6 +15,7 @@ import '../../features/product/presentation/screens/explore_screen.dart';
 import '../../features/product/presentation/screens/category_screen.dart';
 import '../../features/product/presentation/screens/product_list_screen.dart';
 import '../../features/product/presentation/screens/product_details_screen.dart';
+import '../../features/product/presentation/screens/wishlist_screen.dart';
 
 // CART / ORDER
 import '../../features/cart/presentation/screens/cart_screen.dart';
@@ -106,6 +107,10 @@ final router = GoRouter(
                   builder: (_, state) => ProductDetailsScreen(
                     productId: state.pathParameters['id']!,
                   ),
+                ),
+                GoRoute(
+                  path: 'wishlist',
+                  builder: (_, __) => const WishlistScreen(),
                 ),
               ],
             ),

@@ -39,6 +39,15 @@ mixin _$ProductEntity {
   /// Classification
   String get category => throw _privateConstructorUsedError;
   String? get brand => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+
+  /// Metrics for AI Scoring
+  int get salesCount => throw _privateConstructorUsedError;
+  int get viewCount => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+
+  /// Hyperlocal
+  String? get location => throw _privateConstructorUsedError;
 
   /// Optional content
   String? get description => throw _privateConstructorUsedError;
@@ -77,6 +86,11 @@ abstract class $ProductEntityCopyWith<$Res> {
     int stock,
     String category,
     String? brand,
+    List<String> tags,
+    int salesCount,
+    int viewCount,
+    DateTime? createdAt,
+    String? location,
     String? description,
     double rating,
     int reviewCount,
@@ -108,6 +122,11 @@ class _$ProductEntityCopyWithImpl<$Res, $Val extends ProductEntity>
     Object? stock = null,
     Object? category = null,
     Object? brand = freezed,
+    Object? tags = null,
+    Object? salesCount = null,
+    Object? viewCount = null,
+    Object? createdAt = freezed,
+    Object? location = freezed,
     Object? description = freezed,
     Object? rating = null,
     Object? reviewCount = null,
@@ -151,6 +170,26 @@ class _$ProductEntityCopyWithImpl<$Res, $Val extends ProductEntity>
                 ? _value.brand
                 : brand // ignore: cast_nullable_to_non_nullable
                       as String?,
+            tags: null == tags
+                ? _value.tags
+                : tags // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            salesCount: null == salesCount
+                ? _value.salesCount
+                : salesCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            viewCount: null == viewCount
+                ? _value.viewCount
+                : viewCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            createdAt: freezed == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            location: freezed == location
+                ? _value.location
+                : location // ignore: cast_nullable_to_non_nullable
+                      as String?,
             description: freezed == description
                 ? _value.description
                 : description // ignore: cast_nullable_to_non_nullable
@@ -192,6 +231,11 @@ abstract class _$$ProductEntityImplCopyWith<$Res>
     int stock,
     String category,
     String? brand,
+    List<String> tags,
+    int salesCount,
+    int viewCount,
+    DateTime? createdAt,
+    String? location,
     String? description,
     double rating,
     int reviewCount,
@@ -222,6 +266,11 @@ class __$$ProductEntityImplCopyWithImpl<$Res>
     Object? stock = null,
     Object? category = null,
     Object? brand = freezed,
+    Object? tags = null,
+    Object? salesCount = null,
+    Object? viewCount = null,
+    Object? createdAt = freezed,
+    Object? location = freezed,
     Object? description = freezed,
     Object? rating = null,
     Object? reviewCount = null,
@@ -265,6 +314,26 @@ class __$$ProductEntityImplCopyWithImpl<$Res>
             ? _value.brand
             : brand // ignore: cast_nullable_to_non_nullable
                   as String?,
+        tags: null == tags
+            ? _value._tags
+            : tags // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        salesCount: null == salesCount
+            ? _value.salesCount
+            : salesCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        viewCount: null == viewCount
+            ? _value.viewCount
+            : viewCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        createdAt: freezed == createdAt
+            ? _value.createdAt
+            : createdAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        location: freezed == location
+            ? _value.location
+            : location // ignore: cast_nullable_to_non_nullable
+                  as String?,
         description: freezed == description
             ? _value.description
             : description // ignore: cast_nullable_to_non_nullable
@@ -299,11 +368,17 @@ class _$ProductEntityImpl implements _ProductEntity {
     this.stock = 0,
     required this.category,
     this.brand,
+    final List<String> tags = const [],
+    this.salesCount = 0,
+    this.viewCount = 0,
+    this.createdAt,
+    this.location,
     this.description,
     this.rating = 0.0,
     this.reviewCount = 0,
     this.isFeatured = false,
-  }) : _additionalImages = additionalImages;
+  }) : _additionalImages = additionalImages,
+       _tags = tags;
 
   factory _$ProductEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductEntityImplFromJson(json);
@@ -345,6 +420,28 @@ class _$ProductEntityImpl implements _ProductEntity {
   final String category;
   @override
   final String? brand;
+  final List<String> _tags;
+  @override
+  @JsonKey()
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  /// Metrics for AI Scoring
+  @override
+  @JsonKey()
+  final int salesCount;
+  @override
+  @JsonKey()
+  final int viewCount;
+  @override
+  final DateTime? createdAt;
+
+  /// Hyperlocal
+  @override
+  final String? location;
 
   /// Optional content
   @override
@@ -365,7 +462,7 @@ class _$ProductEntityImpl implements _ProductEntity {
 
   @override
   String toString() {
-    return 'ProductEntity(id: $id, name: $name, price: $price, originalPrice: $originalPrice, imageUrl: $imageUrl, additionalImages: $additionalImages, stock: $stock, category: $category, brand: $brand, description: $description, rating: $rating, reviewCount: $reviewCount, isFeatured: $isFeatured)';
+    return 'ProductEntity(id: $id, name: $name, price: $price, originalPrice: $originalPrice, imageUrl: $imageUrl, additionalImages: $additionalImages, stock: $stock, category: $category, brand: $brand, tags: $tags, salesCount: $salesCount, viewCount: $viewCount, createdAt: $createdAt, location: $location, description: $description, rating: $rating, reviewCount: $reviewCount, isFeatured: $isFeatured)';
   }
 
   @override
@@ -388,6 +485,15 @@ class _$ProductEntityImpl implements _ProductEntity {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.brand, brand) || other.brand == brand) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.salesCount, salesCount) ||
+                other.salesCount == salesCount) &&
+            (identical(other.viewCount, viewCount) ||
+                other.viewCount == viewCount) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.rating, rating) || other.rating == rating) &&
@@ -410,6 +516,11 @@ class _$ProductEntityImpl implements _ProductEntity {
     stock,
     category,
     brand,
+    const DeepCollectionEquality().hash(_tags),
+    salesCount,
+    viewCount,
+    createdAt,
+    location,
     description,
     rating,
     reviewCount,
@@ -441,6 +552,11 @@ abstract class _ProductEntity implements ProductEntity {
     final int stock,
     required final String category,
     final String? brand,
+    final List<String> tags,
+    final int salesCount,
+    final int viewCount,
+    final DateTime? createdAt,
+    final String? location,
     final String? description,
     final double rating,
     final int reviewCount,
@@ -476,6 +592,20 @@ abstract class _ProductEntity implements ProductEntity {
   String get category;
   @override
   String? get brand;
+  @override
+  List<String> get tags;
+
+  /// Metrics for AI Scoring
+  @override
+  int get salesCount;
+  @override
+  int get viewCount;
+  @override
+  DateTime? get createdAt;
+
+  /// Hyperlocal
+  @override
+  String? get location;
 
   /// Optional content
   @override

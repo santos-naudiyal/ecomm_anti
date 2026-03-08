@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'wishlist_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'c675afe62bef6ed4c4a5f2e6b3a4e797ae25578e';
+String _$wishlistControllerHash() =>
+    r'18b83df4acc4cc61dd5b3c95ffaddf29782e10b7';
 
-/// See also [AuthController].
-@ProviderFor(AuthController)
-final authControllerProvider =
-    StreamNotifierProvider<AuthController, UserEntity?>.internal(
-      AuthController.new,
-      name: r'authControllerProvider',
+/// See also [WishlistController].
+@ProviderFor(WishlistController)
+final wishlistControllerProvider =
+    StreamNotifierProvider<WishlistController, List<String>>.internal(
+      WishlistController.new,
+      name: r'wishlistControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$authControllerHash,
+          : _$wishlistControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$AuthController = StreamNotifier<UserEntity?>;
+typedef _$WishlistController = StreamNotifier<List<String>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

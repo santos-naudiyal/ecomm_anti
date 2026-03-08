@@ -399,5 +399,28 @@ class _ProductsByCategoryProviderElement
   String get category => (origin as ProductsByCategoryProvider).category;
 }
 
+String _$smartFeedProductsHash() => r'5107a1797ee488d2f9014076f9ca1d455e8bd063';
+
+/// ------------------------------------------------------------
+/// SMART FEED PRODUCTS (AI RANKED)
+/// ------------------------------------------------------------
+///
+/// Copied from [SmartFeedProducts].
+@ProviderFor(SmartFeedProducts)
+final smartFeedProductsProvider =
+    AutoDisposeAsyncNotifierProvider<
+      SmartFeedProducts,
+      List<ProductEntity>
+    >.internal(
+      SmartFeedProducts.new,
+      name: r'smartFeedProductsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$smartFeedProductsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$SmartFeedProducts = AutoDisposeAsyncNotifier<List<ProductEntity>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

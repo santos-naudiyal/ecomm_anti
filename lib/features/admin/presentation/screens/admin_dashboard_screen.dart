@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/theme/app_text_styles.dart';
+import '../widgets/admin_analytics_section.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -7,8 +9,10 @@ class AdminDashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
+        title: const Text('Admin Console'),
+        centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: const Color(0xFF1A237E),
         elevation: 0,
@@ -16,6 +20,10 @@ class AdminDashboardScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          const AdminAnalyticsSection(),
+          const SizedBox(height: 32),
+          Text('Operational Tools', style: AppTextStyles.headingLarge),
+          const SizedBox(height: 16),
           _AdminMenuCard(
             title: 'Manage Products',
             subtitle: 'Add, Edit, Delete Products & Stock',

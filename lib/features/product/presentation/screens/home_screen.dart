@@ -68,7 +68,7 @@ class _HomeSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      expandedHeight: 140,
+      expandedHeight: 180,
       backgroundColor: Colors.transparent,
       elevation: 0,
       automaticallyImplyLeading: false,
@@ -88,27 +88,64 @@ class _HomeSliverAppBar extends StatelessWidget {
                   /// TOP ROW
                   Row(
                     children: [
-                      Text(
-                        'Antigravity',
-                        style: GoogleFonts.outfit(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome to',
+                            style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: Colors.white70,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          Text(
+                            'Tera Shop',
+                            style: GoogleFonts.outfit(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              letterSpacing: -0.5,
+                            ),
+                          ),
+                        ],
                       ),
                       const Spacer(),
                       _GlassIcon(
-                        icon: Icons.notifications_outlined,
+                        icon: Icons.notifications_none_rounded,
                         onTap: () {},
                       ),
-                      const SizedBox(width: 10),
-                      _GlassIcon(
-                        icon: Icons.shopping_bag_outlined,
-                        onTap: () => context.push('/cart'),
+                      const SizedBox(width: 12),
+                      Stack(
+                        children: [
+                          _GlassIcon(
+                            icon: Icons.shopping_bag_outlined,
+                            onTap: () => context.push('/cart'),
+                          ),
+                          Positioned(
+                            right: 4,
+                            top: 4,
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                color: Colors.orange,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Text(
+                                '0',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 20),
 
                   /// LOCATION
                   GestureDetector(
@@ -116,21 +153,32 @@ class _HomeSliverAppBar extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
-                        vertical: 10,
+                        vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.18),
-                        borderRadius: BorderRadius.circular(14),
+                        color: Colors.white.withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.2),
+                          width: 1,
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
-                            Icons.location_on_rounded,
-                            color: Colors.white,
-                            size: 18,
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.location_on_rounded,
+                              color: Colors.white,
+                              size: 14,
+                            ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 10),
                           Flexible(
                             child: addressAsync.when(
                               data: (list) {
@@ -144,6 +192,7 @@ class _HomeSliverAppBar extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 13,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 );
                               },
@@ -160,7 +209,8 @@ class _HomeSliverAppBar extends StatelessWidget {
                           const SizedBox(width: 6),
                           const Icon(
                             Icons.keyboard_arrow_down_rounded,
-                            color: Colors.white,
+                            color: Colors.white70,
+                            size: 20,
                           ),
                         ],
                       ),
@@ -232,11 +282,15 @@ class _SectionHeader extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 28, 16, 12),
         child: Row(
           children: [
-            Text(
-              title,
-              style: GoogleFonts.outfit(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+            Flexible(
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.outfit(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             const Spacer(),
@@ -257,48 +311,113 @@ class _CategoriesStrip extends StatelessWidget {
   final AsyncValue<List<String>> categoriesAsync;
   const _CategoriesStrip(this.categoriesAsync);
 
+  static const Map<String, IconData> _categoryIcons = {
+    'Electronics': Icons.devices_other_rounded,
+    'Fashion': Icons.checkroom_rounded,
+    'Home': Icons.home_max_rounded,
+    'Beauty': Icons.auto_awesome_rounded,
+    'Sports': Icons.sports_basketball_rounded,
+    'Groceries': Icons.shopping_basket_rounded,
+  };
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 90,
+        height: 110,
         child: categoriesAsync.when(
           data: (list) => ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
-            itemBuilder: (_, i) => GestureDetector(
-              onTap: () => context.push('/explore/category', extra: list[i]),
-              child: Container(
-                width: 90,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 10,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (_, i) {
+              final name = list[i];
+              final icon = _categoryIcons[name] ?? Icons.category_rounded;
+              return GestureDetector(
+                onTap: () => context.push('/explore/category', extra: name),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 72,
+                      height: 72,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Icon(
+                          icon,
+                          color: AppColors.primary,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: 80,
+                      child: Text(
+                        name,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Text(
-                    list[i],
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
+              );
+            },
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
             itemCount: list.length,
           ),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, __) => _CategoryShimmer(),
+            separatorBuilder: (_, __) => const SizedBox(width: 16),
+            itemCount: 5,
+          ),
           error: (_, __) => const SizedBox(),
         ),
       ),
+    );
+  }
+}
+
+class _CategoryShimmer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 72,
+          height: 72,
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.05),
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          width: 50,
+          height: 10,
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.05),
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -357,11 +476,11 @@ class _ProductCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              blurRadius: 14,
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 16,
               offset: const Offset(0, 8),
             ),
           ],
@@ -369,13 +488,38 @@ class _ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                child: Image.network(product.imageUrl, fit: BoxFit.cover),
+            Expanded(
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(24),
+                      bottom: Radius.circular(24),
+                    ),
+                    child: Image.network(
+                      product.imageUrl,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  ),
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.9),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.favorite_border_rounded,
+                        size: 18,
+                        color: Colors.redAccent,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -385,23 +529,35 @@ class _ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(fontSize: 13),
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
                       Text(
                         '₹${(product.price / 100).toStringAsFixed(0)}',
                         style: GoogleFonts.outfit(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.primary,
                         ),
                       ),
                       const Spacer(),
-                      const Icon(Icons.star, size: 14, color: Colors.amber),
-                      const Text('4.5', style: TextStyle(fontSize: 12)),
+                      const Icon(Icons.star_rounded, size: 16, color: Colors.orange),
+                      const SizedBox(width: 2),
+                      Text(
+                        '4.5',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -425,36 +581,74 @@ class _DealOfTheDayBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Colors.orange, Colors.deepOrange],
+        gradient: LinearGradient(
+          colors: [const Color(0xFFFF5F6D), const Color(0xFFFFC371)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFFF5F6D).withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'Limited Offer',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
                 Text(
                   'Deal of the Day',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Up to 50% OFF',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Text(
+                  'Up to 70% OFF on all items',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
           ),
-          const Icon(Icons.local_offer, size: 64, color: Colors.white),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.flash_on_rounded,
+              size: 40,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );
@@ -502,38 +696,72 @@ class _HeroBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.network(image, fit: BoxFit.cover),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(28),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.network(image, fit: BoxFit.cover),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.7),
+                    Colors.black.withOpacity(0.1),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.outfit(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      'NEW',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-                Text(subtitle, style: const TextStyle(color: Colors.white70)),
-              ],
+                  const SizedBox(height: 10),
+                  Text(
+                    title,
+                    style: GoogleFonts.outfit(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white70,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

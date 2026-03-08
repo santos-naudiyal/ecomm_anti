@@ -4,6 +4,7 @@ import '../../domain/entities/cart_item.dart';
 import '../../../product/domain/entities/product_entity.dart';
 import '../../data/repositories/cart_repository_impl.dart';
 import '../../../order/domain/entities/order_entity.dart';
+import '../../../product/domain/services/trending_service.dart';
 
 part 'cart_controller.g.dart';
 
@@ -56,6 +57,13 @@ class CartController extends _$CartController {
     await ref
         .read(cartRepositoryProvider)
         .updateQuantity(productId, item.quantity + 1);
+
+    // Track trending activity
+    ref.read(trendingServiceProvider.notifier).trackActivity(
+      productId: productId,
+      type: TrendingActivityType.addToCart,
+      location: 'Mumbai',
+    );
   }
 
   Future<void> decrementQuantity(String productId) async {

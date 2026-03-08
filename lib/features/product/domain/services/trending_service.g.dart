@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'trending_service.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'c675afe62bef6ed4c4a5f2e6b3a4e797ae25578e';
+String _$trendingServiceHash() => r'33beaae027e53db7fbb66765c8676d0bbd91e6e8';
 
-/// See also [AuthController].
-@ProviderFor(AuthController)
-final authControllerProvider =
-    StreamNotifierProvider<AuthController, UserEntity?>.internal(
-      AuthController.new,
-      name: r'authControllerProvider',
+/// See also [TrendingService].
+@ProviderFor(TrendingService)
+final trendingServiceProvider =
+    NotifierProvider<TrendingService, void>.internal(
+      TrendingService.new,
+      name: r'trendingServiceProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$authControllerHash,
+          : _$trendingServiceHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$AuthController = StreamNotifier<UserEntity?>;
+typedef _$TrendingService = Notifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

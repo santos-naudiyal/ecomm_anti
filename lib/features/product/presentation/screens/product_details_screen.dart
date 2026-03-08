@@ -9,6 +9,9 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 
+import '../widgets/ai_summary_widget.dart';
+import '../../domain/services/trending_service.dart';
+
 class ProductDetailsScreen extends ConsumerWidget {
   final String productId;
 
@@ -26,6 +29,15 @@ class ProductDetailsScreen extends ConsumerWidget {
           if (product == null) {
             return const Center(child: Text('Product not found'));
           }
+
+          // Track view for trending
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ref.read(trendingServiceProvider.notifier).trackActivity(
+                  productId: productId,
+                  type: TrendingActivityType.view,
+                  location: 'Mumbai',
+                );
+          });
 
           return Stack(
             children: [
@@ -110,8 +122,7 @@ class _ProductInfo extends StatelessWidget {
 
         const SizedBox(height: AppSpacing.md),
 
-        _InfoRow(icon: Icons.local_shipping, text: 'Free Delivery'),
-        _InfoRow(icon: Icons.verified, text: '100% Genuine Product'),
+        AISummaryWidget(description: product.description ?? ''),
 
         const SizedBox(height: AppSpacing.lg),
 

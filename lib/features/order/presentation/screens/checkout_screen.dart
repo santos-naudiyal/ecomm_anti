@@ -11,6 +11,7 @@ import '../widgets/checkout_address_selector.dart';
 import '../widgets/checkout_payment_selector.dart';
 import '../widgets/checkout_order_summary.dart';
 import '../widgets/payment_inputs.dart'; // Import Payment Inputs
+import '../widgets/smart_coupon_widget.dart';
 import '../../../../core/payment/payment_service.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
@@ -168,6 +169,13 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                         ),
                     ],
                   ),
+                ),
+
+                const SliverToBoxAdapter(child: SizedBox(height: 32)),
+
+                // SMART COUPON
+                SliverToBoxAdapter(
+                  child: SmartCouponWidget(subtotal: subtotal),
                 ),
 
                 const SliverToBoxAdapter(child: SizedBox(height: 32)),

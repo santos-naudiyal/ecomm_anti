@@ -11,18 +11,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const ProviderScope(child: AntigravityApp()));
+  runApp(const ProviderScope(child: TeraShopApp()));
 }
 
-class AntigravityApp extends ConsumerWidget {
-  const AntigravityApp({super.key});
+class TeraShopApp extends ConsumerWidget {
+  const TeraShopApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeControllerProvider);
 
     return MaterialApp.router(
-      title: 'Antigravity',
+      title: 'Tera Shop',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

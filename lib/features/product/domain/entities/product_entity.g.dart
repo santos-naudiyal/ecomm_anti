@@ -21,6 +21,15 @@ _$ProductEntityImpl _$$ProductEntityImplFromJson(Map<String, dynamic> json) =>
       stock: (json['stock'] as num?)?.toInt() ?? 0,
       category: json['category'] as String,
       brand: json['brand'] as String?,
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      salesCount: (json['salesCount'] as num?)?.toInt() ?? 0,
+      viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      location: json['location'] as String?,
       description: json['description'] as String?,
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
       reviewCount: (json['reviewCount'] as num?)?.toInt() ?? 0,
@@ -38,6 +47,11 @@ Map<String, dynamic> _$$ProductEntityImplToJson(_$ProductEntityImpl instance) =>
       'stock': instance.stock,
       'category': instance.category,
       'brand': instance.brand,
+      'tags': instance.tags,
+      'salesCount': instance.salesCount,
+      'viewCount': instance.viewCount,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'location': instance.location,
       'description': instance.description,
       'rating': instance.rating,
       'reviewCount': instance.reviewCount,

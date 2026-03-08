@@ -13,15 +13,26 @@ class ProductEntity with _$ProductEntity {
     /// Pricing (PAISE, not double)
     @JsonKey(fromJson: _readPrice) @Default(0) int price, // selling price
     int? originalPrice, // MRP (optional)
+
     /// Media
     required String imageUrl,
     @Default([]) List<String> additionalImages,
 
     /// Inventory
     @Default(0) int stock, // 0 = out of stock
+
     /// Classification
     required String category,
     String? brand,
+    @Default([]) List<String> tags,
+
+    /// Metrics for AI Scoring
+    @Default(0) int salesCount,
+    @Default(0) int viewCount,
+    DateTime? createdAt,
+
+    /// Hyperlocal
+    String? location,
 
     /// Optional content
     String? description,

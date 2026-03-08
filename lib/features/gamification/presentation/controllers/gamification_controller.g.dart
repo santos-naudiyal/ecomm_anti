@@ -1,26 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'gamification_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authControllerHash() => r'c675afe62bef6ed4c4a5f2e6b3a4e797ae25578e';
+String _$gamificationControllerHash() =>
+    r'e7c55bb347c47f792a1593112ae0029c19041981';
 
-/// See also [AuthController].
-@ProviderFor(AuthController)
-final authControllerProvider =
-    StreamNotifierProvider<AuthController, UserEntity?>.internal(
-      AuthController.new,
-      name: r'authControllerProvider',
+/// See also [GamificationController].
+@ProviderFor(GamificationController)
+final gamificationControllerProvider =
+    StreamNotifierProvider<
+      GamificationController,
+      Map<String, dynamic>
+    >.internal(
+      GamificationController.new,
+      name: r'gamificationControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$authControllerHash,
+          : _$gamificationControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$AuthController = StreamNotifier<UserEntity?>;
+typedef _$GamificationController = StreamNotifier<Map<String, dynamic>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

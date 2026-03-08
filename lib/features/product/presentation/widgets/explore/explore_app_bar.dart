@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_text_styles.dart';
+import '../../../../gamification/presentation/widgets/gamification_header.dart';
 
 class ExploreAppBar extends StatelessWidget {
   const ExploreAppBar({super.key});
@@ -72,21 +73,27 @@ class _SearchSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title
+              // Title & Wallet info
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 200),
                 opacity: percent > 0.5 ? 1.0 : 0.0,
                 child: percent > 0.5
                     ? Padding(
                         padding: const EdgeInsets.only(bottom: 12),
-                        child: Text(
-                          'Explore',
-                          style: AppTextStyles.displayLarge.copyWith(
-                            height: 1,
-                            color: Theme.of(
-                              context,
-                            ).textTheme.headlineLarge?.color,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Explore',
+                              style: AppTextStyles.displayLarge.copyWith(
+                                height: 1,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge?.color,
+                              ),
+                            ),
+                            const GamificationHeader(),
+                          ],
                         ),
                       )
                     : const SizedBox.shrink(),
